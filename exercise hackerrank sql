@@ -1,0 +1,28 @@
+Suponiendo que la información se encuentra en una tabla llamada "STATION", 
+que tiene las columnas "CITY" y "LONGITUDE", se podría utilizar la siguiente consulta SQL:
+
+SELECT CITY, LENGTH(CITY) AS LONGITUDE 
+FROM STATION 
+WHERE LENGTH(CITY) = (SELECT MIN(LENGTH(CITY)) FROM STATION) 
+ORDER BY CITY ASC 
+LIMIT 1;
+
+SELECT CITY, LENGTH(CITY) AS LONGITUDE
+FROM STATION 
+WHERE LENGTH(CITY) = (SELECT MAX(LENGTH(CITY)) FROM STATION) 
+ORDER BY CITY ASC 
+LIMIT 1;
+
+La primera consulta selecciona la ciudad con el nombre más corto y su longitud, 
+utilizando la función LENGTH para obtener la longitud del nombre de la ciudad. 
+
+El WHERE filtra las ciudades cuya longitud coincide con la longitud mínima obtenida mediante una subconsulta. 
+El ORDER BY ordena las ciudades por orden alfabético ascendente y el LIMIT limita el resultado a una única fila, 
+en caso de haber más de una ciudad con la longitud mínima.
+
+La segunda consulta es similar, pero selecciona la ciudad con el nombre más largo y su longitud, 
+utilizando la función MAX en lugar de MIN para obtener la longitud máxima. 
+El resto de la consulta es idéntico al de la primera consulta.
+
+El AS LONGITUD se utiliza para asignar un alias a la columna resultante que muestra la longitud del nombre de la ciudad, 
+para que sea más fácil de entender y utilizar en consultas y análisis posteriores.
